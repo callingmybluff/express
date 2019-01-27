@@ -1,16 +1,32 @@
 # express
 
-A new Flutter project.
+A plugin to separate the app into Routers, Controller, Models, and Views easily.
 
-## Getting Started
+## Examples
 
-This project is a starting point for a Flutter application.
+    void main() {
+      runApp(
+        Express(
+          router: ExpressRouter(
+            {
+              '/secondPage': ExpressController(
+                view: SecondPage(),
+              ),
+              '/': ExpressController(
+                view: FirstPage(),
+              ),
+            }
+          ),
+        )
+        // Express is not a widget. Do not forget to call the render function
+        .render()
+      );
+    }
 
-A few resources to get you started if this is your first Flutter project:
+For more examples, please refer to [their folder](https://github.com/callingmybluff/express/tree/master/example).
 
-- [Lab: Write your first Flutter app](https://flutter.io/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.io/docs/cookbook)
 
-For help getting started with Flutter, view our 
-[online documentation](https://flutter.io/docs), which offers tutorials, 
-samples, guidance on mobile development, and a full API reference.
+## TODO
+- Work on passing data
+- Modify the flow to call the router instead of simply calling the navigator.
+- Link pages using `actions` or `events` to allow a whole graph of connections easily.

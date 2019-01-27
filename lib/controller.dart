@@ -1,4 +1,4 @@
-import 'package:express/express-view.dart';
+import 'package:express/view.dart';
 import 'package:flutter/material.dart';
 
 class ExpressController {

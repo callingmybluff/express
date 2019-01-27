@@ -1,6 +1,6 @@
-import 'package:express/express-controller.dart';
-import 'package:express/express-router.dart';
-import 'package:express/express-view.dart';
+import 'package:express/controller.dart';
+import 'package:express/router.dart';
+import 'package:express/view.dart';
 import 'package:express/express.dart';
 import 'package:flutter/material.dart';
 
@@ -9,11 +9,11 @@ void main() {
     Express(
       router: ExpressRouter(
         {
-          '/secondPage': ExpressController(
-            view: SecondPage(),
-          ),
           '/': ExpressController(
             view: FirstPage(),
+          ),
+          '/secondPage': ExpressController(
+            view: SecondPage(),
           ),
         }
       ),
