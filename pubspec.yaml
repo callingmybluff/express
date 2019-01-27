@@ -1,5 +1,5 @@
-name: express
-description: A new Flutter project.
+name: express_app
+description: A package to easily separate the app into Routers, Controller, Models, and Views.
 author: callingmybluff <ismaeel.abuabdallah@gmail.com>
 homepage: https://github.com/callingmybluff/express
 
