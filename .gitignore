@@ -1,0 +1,12 @@
+# Folders
+android/
+build/
+ios/
+.idea/
+.vscode/
+
+#Files
+.metadata
+.packages
+pubspec.lock
+express.iml
