@@ -1,50 +1,30 @@
-import 'package:express_app/controller.dart';
+import 'package:express_app/route.dart';
 import 'package:flutter/material.dart';
 
 class ExpressRouter {
-  final Map<String, ExpressController> routes;
+  final Map<String, ExpressRoute> routes;
+  ExpressRoute currentRouter;
+
+  init( Widget firstRoute ) {
+    this.currentRouter = routes.values.first;
+
+    routes.forEach((key, value) {
+      if (value.runtimeType == firstRoute.runtimeType)
+        this.currentRouter = value;
+    });
+  }
 
   /// Cannot install a MaterialPageRoute<dynamic> after disposing it.
   //final _cashedRoutes = Map<String, MaterialPageRoute>();
   String initialRoute;
 
-  ExpressRouter([this.routes = const {}]) {
-    print("Lengths is " + routes.length.toString());
-    if (routes.length > 0) {
-      print(routes.keys.first);
-      this.initialRoute = routes.keys.first;
-    }
-  }
+  ExpressRouter({@required this.routes});
 
-  ExpressRouter add(String route, ExpressController controller) {
-    if (this.initialRoute == null)
-      this.initialRoute = route;
-    this.routes[route] = controller;
-
-    // Allow concat calls
-    return this;
-  }
-  Route onRoute(RouteSettings routeSettings) {
-    print("Looking inside our routes ... for " + routeSettings.name);
-    String routeName = routeSettings.name;
-    //if (routeName == '/')
-    //  routeName = this.initialRoute;
-    if ( !this.routes.containsKey( routeName ) )
-      // Return failure (will go to `onNotFound`)
-      return null;
-
-    print("Returning route for " + routeName);
-    return this._newRoute(routeSettings, this.routes[routeName]);
-  }
-  _newRoute(RouteSettings routeSettings, ExpressController controller) {
-    print("Makde new route for " + routeSettings.name);
+  perform( String action ) {
+    print("Performing dis " + action);
+    currentRouter = this.routes[currentRouter.getRoute(action)];
     return MaterialPageRoute(
-      settings: routeSettings,
-      builder: controller.render,
+      builder: currentRouter.build,
     );
-  }
-
-  Route onNotFound(RouteSettings routeSettings) {
-    throw new Exception("This should never be the case as `onRoute` never returns null. Hanlding non-existing routes should be there, too (" + routeSettings.name + ")");
   }
 }

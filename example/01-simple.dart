@@ -1,6 +1,5 @@
-import 'package:express_app/controller.dart';
+import 'package:express_app/route.dart';
 import 'package:express_app/router.dart';
-import 'package:express_app/view.dart';
 import 'package:express_app/express.dart';
 import 'package:flutter/material.dart';
 
@@ -8,22 +7,29 @@ void main() {
   runApp(
     Express(
       router: ExpressRouter(
-        {
-          '/': ExpressController(
-            view: FirstPage(),
+        routes: {
+          '/': ExpressRoute(
+            build: (BuildContext context) => FirstPage(),
+            actions: {
+              'next': '/secondPage',
+            },
           ),
-          '/secondPage': ExpressController(
-            view: SecondPage(),
-          ),
-        }
+          '/secondPage': ExpressRoute(
+            build: (BuildContext context) => SecondPage(),
+            actions: {
+              'back': '/',
+            }
+          )
+        },
       ),
-    )
-    // Express is not a widget. Do not forget to call the render function
-    .render()
+      app: MaterialApp(
+        home: FirstPage(),
+      ),
+    ).render()
   );
 }
 
-class FirstPage extends ExpressViewStateless {
+class FirstPage extends StatelessWidget {
   @override
   build(BuildContext context) {
     return Container(
@@ -36,7 +42,7 @@ class FirstPage extends ExpressViewStateless {
             child: Text("Go 2 page 2"),
             onPressed: () {
               print("Click");
-              Navigator.of(context).pushNamed('/secondPage');
+              Express.of(context).perform(context, "next");
             },
           )
         ],
@@ -45,8 +51,8 @@ class FirstPage extends ExpressViewStateless {
   }
 }
 
-class SecondPage extends ExpressViewStateless {
-  String title = "default title";
+class SecondPage extends StatelessWidget {
+  final String title = "default title";
   @override
   build(BuildContext context) {
     return Container(
