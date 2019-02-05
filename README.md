@@ -12,27 +12,41 @@ Please note version's number. This is still a beta, and only published to get fe
       runApp(
         Express(
           router: ExpressRouter(
-            {
-              '/secondPage': ExpressController(
-                view: SecondPage(),
+            routes: {
+              '/': ExpressRoute(
+                build: (BuildContext context) => FirstPage(),
+                actions: {
+                  'next': '/secondPage',
+                },
               ),
-              '/': ExpressController(
-                view: FirstPage(),
-              ),
-            }
+              '/secondPage': ExpressRoute(
+                build: (BuildContext context) => SecondPage(),
+                actions: {
+                  'back': '/',
+                }
+              )
+            },
           ),
-        )
-        // Express is not a widget. Do not forget to call the render function
-        .render()
+          app: MaterialApp(
+            home: FirstPage(),
+          ),
+        ).render()
       );
     }
+
 
 For more examples, please refer to [their folder](https://github.com/callingmybluff/express/tree/master/example).
 
 
 ## TODO
-- Find a way for the `StatefulWidget` to work
-- Work on passing data
-- Modify the flow to call the router instead of simply calling the navigator.
-- Link pages using `actions` or `events` to allow a whole graph of connections easily.
-- Use models
+[x] Find a way for the `StatefulWidget` to work
+
+[ ] Work on passing data
+
+[x] Modify the flow to call the router instead of simply calling the navigator.
+
+[x] Link pages using `actions` or `events` to allow a whole graph of connections easily.
+
+[ ] Use models
+
+For more, pelase visit our bugs pages on GitHub.

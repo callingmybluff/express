@@ -21,7 +21,6 @@ class ExpressRouter {
   ExpressRouter({@required this.routes});
 
   perform( String action ) {
-    print("Performing dis " + action);
     currentRouter = this.routes[currentRouter.getRoute(action)];
     return MaterialPageRoute(
       builder: currentRouter.build,
