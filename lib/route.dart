@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 class ExpressRoute {
   final Map<String, String> actions;
-  final Function(BuildContext) build;
+  final Widget Function(BuildContext) build;
 
   ExpressRoute({
     this.actions,

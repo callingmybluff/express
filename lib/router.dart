@@ -23,7 +23,14 @@ class ExpressRouter {
   perform( String action ) {
     currentRouter = this.routes[currentRouter.getRoute(action)];
     return MaterialPageRoute(
-      builder: currentRouter.build,
+      builder: (BuildContext context) {
+        return WillPopScope(
+          child: currentRouter.build(context),
+          onWillPop: () {
+            print("Going back .......... ");
+          },
+        );
+      },
     );
   }
 }
