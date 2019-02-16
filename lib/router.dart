@@ -20,17 +20,20 @@ class ExpressRouter {
 
   ExpressRouter({@required this.routes});
 
-  perform( String action ) {
+  dynamic perform( String action, [bool getExpressRoute = false] ) {
     currentRouter = this.routes[currentRouter.getRoute(action)];
-    return MaterialPageRoute(
-      builder: (BuildContext context) {
-        return WillPopScope(
-          child: currentRouter.build(context),
-          onWillPop: () {
-            print("Going back .......... ");
-          },
-        );
-      },
-    );
+    if (getExpressRoute)
+      return currentRouter;
+    else
+      return MaterialPageRoute(
+        builder: (BuildContext context) {
+          return WillPopScope(
+            child: currentRouter.build(context),
+            onWillPop: () {
+              print("Going back .......... ");
+            },
+          );
+        },
+      );
   }
 }

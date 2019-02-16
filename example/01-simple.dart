@@ -23,7 +23,12 @@ void main() {
         },
       ),
       app: MaterialApp(
-        home: FirstPage(),
+        home: Material(
+          type: MaterialType.transparency,
+          child: ExpressHome(
+            child: FirstPage(),
+          ),
+        ),
       ),
     )
   );
