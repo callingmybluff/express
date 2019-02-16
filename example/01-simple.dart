@@ -25,7 +25,7 @@ void main() {
       app: MaterialApp(
         home: FirstPage(),
       ),
-    ).render()
+    )
   );
 }
 
@@ -42,7 +42,7 @@ class FirstPage extends StatelessWidget {
             child: Text("Go 2 page 2"),
             onPressed: () {
               print("Click");
-              Express.of(context).perform(context, "next");
+              Express.of(context).perform("next");
             },
           )
         ],

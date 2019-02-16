@@ -5,6 +5,7 @@ class Express extends InheritedWidget {
   final MaterialApp app;
   final ExpressRouter router;
   final Map<String, dynamic> parameters;
+  static BuildContext _latestContext;
 
   Express(
     {
@@ -13,23 +14,18 @@ class Express extends InheritedWidget {
 
       // Do not modify the routing attributes as they will be overriden
       @required this.app,
-    }) : super(child: app) {
+      Key key,
+    }) : super(key: key, child: app) {
       this.router.init(app.home);
     }
 
-  render() {
-    return this;
-  }
-
-  onRouteGenerate() {
-  }
-
-  perform( BuildContext context, String action ) {
-    Navigator.of(context).pushReplacement(router.perform(action));
+  perform( String action ) {
+    Navigator.of(Express._latestContext).pushReplacement(router.perform(action));
   }
 
   static Express of(BuildContext context) {
-    return context.inheritFromWidgetOfExactType(Express);
+    Express._latestContext = context;
+    return context.inheritFromWidgetOfExactType(Express) as Express;
   }
   @override
   bool updateShouldNotify(InheritedWidget oldWidget) => false;
