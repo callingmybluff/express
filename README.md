@@ -35,18 +35,18 @@ Please note version's number. This is still a beta, and only published to get fe
     }
 
 
-For more examples, please refer to [their folder](https://github.com/callingmybluff/express/tree/master/example).
+For more examples, especially for using `ExpressHome`, please refer to [their folder](https://github.com/callingmybluff/express/tree/master/example).
 
 
 ## TODO
-[x] Find a way for the `StatefulWidget` to work
+-[x] Find a way for the `StatefulWidget` to work
 
-[ ] Work on passing data
+-[ ] Work on passing data
 
-[x] Modify the flow to call the router instead of simply calling the navigator.
+-[x] Modify the flow to call the router instead of simply calling the navigator.
 
-[x] Link pages using `actions` or `events` to allow a whole graph of connections easily.
+-[x] Link pages using `actions` or `events` to allow a whole graph of connections easily.
 
-[ ] Use models
+-[ ] Use models
 
 For more, pelase visit our bugs pages on GitHub.

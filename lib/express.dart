@@ -27,7 +27,7 @@ class Express extends InheritedWidget {
     else {
       _ExpressHome theHome = homeHolder.child;
       ExpressRoute route = router.perform(action, true) as ExpressRoute;
-      print(route);
+      print("Changing route .... using " + action);
       theHome.child.value = route.build(Express._latestContext);
       //theHome.child.value = router.perform(action).currentResult;
     }
